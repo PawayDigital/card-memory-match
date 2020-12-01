@@ -1,0 +1,15 @@
+#home {
+  background-image: url("https://res.cloudinary.com/dlgvxohur/image/upload/v1606774892/gv8etqalnxbvnru57dkb.png");
+  width: 100%;
+  height: 100vh;
+  background-size: 100%;
+}
+#fondo {
+  background-image: url("https://res.cloudinary.com/dlgvxohur/image/upload/v1606774895/vs9068jr2i8tjecook0e.png");
+  width: 100%;
+  height: 100vh;
+  background-size: 100%;
+}
+.offset-1 {
+  margin-left: 42px !important;
+}
