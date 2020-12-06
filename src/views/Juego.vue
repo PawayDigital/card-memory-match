@@ -33,16 +33,17 @@
 </template>
 
 <script>
-import swal from "sweetalert";
-import { pelicula } from "../assets/images/pelicula";
+import AlertService from "@/services/alert.service";
+import { carros } from "@/assets/images/carros";
+import { logos } from "@/assets/images/logos";
 export default {
   name: "Juego",
   data() {
     return {
       categoria: "",
       imagenes: [],
-      animales: [],
-      frutas: [],
+      logos: [],
+      carros: [],
       COLUMNAS: 0,
       alto: 0,
       ciclo: 0,
@@ -73,13 +74,14 @@ export default {
         (this.COLUMNAS = parseInt(localStorage.getItem("ancho")));
       this.alto = parseInt(localStorage.getItem("alto"));
       this.ciclo = this.alto * this.COLUMNAS;
-      this.animales = pelicula; //IMAGENES!!!!
+      this.logos = logos; //IMAGENES logos!!!!
+      this.carros = carros;
       switch (this.categoria) {
-        case "animales":
-          this.imagenes = this.animales;
+        case "logos":
+          this.imagenes = this.logos;
           break;
-        case "frutas":
-          this.imagenes = this.frutas;
+        case "carros":
+          this.imagenes = this.carros;
           break;
       }
       this.reiniciarJuego();
@@ -173,7 +175,7 @@ export default {
         this.ultimasCoordenadas.indiceImagen = null;
         // Cada que acierta comprobamos si ha ganado
         if (this.haGanado()) {
-          this.indicarVictoria();
+          this.victoria();
         }
       } else {
         // Si no acierta, entonces giramos ambas imágenes
@@ -201,35 +203,15 @@ export default {
         arreglo.every((imagen) => imagen.acertada)
       );
     },
-    // Mostrar alerta de victoria y reiniciar juego
-    indicarVictoria() {
-      swal({
-        icon:
-          "https://i.pinimg.com/474x/d6/ec/34/d6ec3410a8babd77a758bcd20b632470.jpg",
-        text: "Intentos: " + this.intentos,
-        buttons: {
-          reiniciar: {
-            text: "Reiniciar",
-          },
-          home: {
-            text: "Salir",
-          },
-        },
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-      }).then((value) => {
-        switch (value) {
-          case "reiniciar":
-            this.reiniciarJuego();
-            break;
-          case "home":
-            this.$router.push("/Categorias");
-            break;
-        }
-      });
+    victoria() {
+      AlertService.indicarVictoria(
+        this.intentos,
+        this.reiniciarJuego(),
+        this.$router.push("/categorias")
+      );
     },
     mezclarArreglo(a) {
-      var j, x, i;
+      let j, x, i;
       for (i = a.length - 1; i > 0; i--) {
         j = Math.floor(Math.random() * (i + 1));
         x = a[i];
