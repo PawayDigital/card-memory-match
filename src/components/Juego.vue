@@ -12,7 +12,7 @@
       </p>
     </div>
     <div
-      v-for="(fila, indiceFila) in memorama"
+      v-for="(fila, indiceFila) in memory"
       :key="indiceFila"
       class="row mx-1 "
     >
@@ -50,7 +50,7 @@ export default {
       imagenes: [],
       logos: [],
       carros: [],
-      COLUMNAS: 0,
+      columnas: 0,
       alto: 0,
       ciclo: 0,
       intentos: 0,
@@ -58,7 +58,7 @@ export default {
       tiempo: 0,
       tiempoHTML: 0,
       temporizadorr: "",
-      memorama: [],
+      memory: [],
       imageOculta:
         "https://res.cloudinary.com/dlgvxohur/image/upload/v1606774889/sck0lko5kumiyrvpmkdk.png",
       voltearImage: 1,
@@ -83,9 +83,9 @@ export default {
   methods: {
     cargueJuego() {
       (this.categoria = localStorage.getItem("categoria")),
-        (this.COLUMNAS = parseInt(localStorage.getItem("ancho")));
+        (this.columnas = parseInt(localStorage.getItem("ancho")));
       this.alto = parseInt(localStorage.getItem("alto"));
-      this.ciclo = this.alto * this.COLUMNAS;
+      this.ciclo = this.alto * this.columnas;
       // imagenes
       this.logos = logos;
       this.carros = carros;
@@ -108,7 +108,7 @@ export default {
       }, 1000);
     },
     reiniciarJuego() {
-      let memorama = [];
+      let memory = [];
       let cantImage = [];
       this.imagenes.forEach((imagen, indice) => {
         let imagenDeMemorama = {
@@ -122,22 +122,22 @@ export default {
 
       //solo tomar la cantidad requerida
       for (let i = 0; i < this.ciclo; i++) {
-        memorama[i] = cantImage[i];
+        memory[i] = cantImage[i];
       }
       // hacerlo aleatorio las cartas
-      this.mezclarArreglo(memorama);
+      this.mezclarArreglo(memory);
 
       // Dividirlo en columnas
       let memoramaDividido = [];
-      for (let i = 0; i < this.ciclo; i += this.COLUMNAS) {
-        memoramaDividido.push(memorama.slice(i, i + this.COLUMNAS));
+      for (let i = 0; i < this.ciclo; i += this.columnas) {
+        memoramaDividido.push(memory.slice(i, i + this.columnas));
       }
       // Reiniciar intentos
       this.intentos = 0;
       this.aciertos = 0;
       this.tiempoHTML = 0;
       // Asignar a instancia de Vue para que lo dibuje
-      this.memorama = memoramaDividido;
+      this.memory = memoramaDividido;
     },
     // cuando se hace click en la imagen se activa el metodo
     voltear(indiceFila, indiceImagen) {
@@ -146,7 +146,7 @@ export default {
         return;
       }
       // Si es una imagen acertada, no intenten voltear de nuevo la imagen
-      if (this.memorama[indiceFila][indiceImagen].acertada) {
+      if (this.memory[indiceFila][indiceImagen].acertada) {
         return;
       }
 
@@ -155,7 +155,7 @@ export default {
         this.ultimasCoordenadas.indiceFila === null &&
         this.ultimasCoordenadas.indiceImagen === null
       ) {
-        this.memorama[indiceFila][indiceImagen].mostrar = true;
+        this.memory[indiceFila][indiceImagen].mostrar = true;
         this.ultimasCoordenadas.indiceFila = indiceFila;
         this.ultimasCoordenadas.indiceImagen = indiceImagen;
         return;
@@ -168,26 +168,26 @@ export default {
         return;
       }
       // Si es el que estaba mostrada, lo ocultamos de nuevo
-      let imagenSeleccionada = this.memorama[indiceFila][indiceImagen];
-      let ultimaImagenSeleccionada = this.memorama[
+      let imagenSeleccionada = this.memory[indiceFila][indiceImagen];
+      let ultimaImagenSeleccionada = this.memory[
         this.ultimasCoordenadas.indiceFila
       ][this.ultimasCoordenadas.indiceImagen];
       if (
         indiceFila === this.ultimasCoordenadas.indiceFila &&
         indiceImagen === this.ultimasCoordenadas.indiceImagen
       ) {
-        this.memorama[indiceFila][indiceImagen].mostrar = false;
+        this.memory[indiceFila][indiceImagen].mostrar = false;
         this.ultimasCoordenadas.indiceFila = null;
         this.ultimasCoordenadas.indiceImagen = null;
         this.aumentarIntento();
         return;
       }
       // En caso de que la haya encontrado, ¡acierta!
-      this.memorama[indiceFila][indiceImagen].mostrar = true;
+      this.memory[indiceFila][indiceImagen].mostrar = true;
       if (imagenSeleccionada.ruta === ultimaImagenSeleccionada.ruta) {
         this.aciertos++;
-        this.memorama[indiceFila][indiceImagen].acertada = true;
-        this.memorama[this.ultimasCoordenadas.indiceFila][
+        this.memory[indiceFila][indiceImagen].acertada = true;
+        this.memory[this.ultimasCoordenadas.indiceFila][
           this.ultimasCoordenadas.indiceImagen
         ].acertada = true;
         this.ultimasCoordenadas.indiceFila = null;
@@ -201,9 +201,9 @@ export default {
         // Si no acierta, entonces giramos ambas imágenes
         this.esperandoTimeout = true;
         setTimeout(() => {
-          this.memorama[indiceFila][indiceImagen].mostrar = false;
-          this.memorama[indiceFila][indiceImagen].animacion = false;
-          this.memorama[this.ultimasCoordenadas.indiceFila][
+          this.memory[indiceFila][indiceImagen].mostrar = false;
+          this.memory[indiceFila][indiceImagen].animacion = false;
+          this.memory[this.ultimasCoordenadas.indiceFila][
             this.ultimasCoordenadas.indiceImagen
           ].mostrar = false;
           this.ultimasCoordenadas.indiceFila = null;
@@ -218,7 +218,7 @@ export default {
     },
     // Método que indica si el jugador ha ganado
     haGanado() {
-      return this.memorama.every((arreglo) =>
+      return this.memory.every((arreglo) =>
         arreglo.every((imagen) => imagen.acertada)
       );
     },
