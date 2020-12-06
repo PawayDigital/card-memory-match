@@ -22,7 +22,7 @@
           <b-col cols="6"
             ><router-link to="/game/peliculas" class="btn btn-dark px-4">
               <div>
-                <img src="@/assets/peliculas/5.jpg" width="50" height="50" />
+                <!-- <img src="@/assets/peliculas/5.jpg" width="50" height="50" /> -->
               </div>
               <div class="mt-2">Peliculas</div>
             </router-link></b-col
