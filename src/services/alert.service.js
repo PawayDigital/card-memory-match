@@ -2,11 +2,21 @@ import swal from "sweetalert";
 import router from "@/router";
 export default new (class AlertService {
   // Mostrar alerta de victoria y reiniciar juego
-  indicarVictoria(intentos, reiniciarJuego) {
+  indicarVictoria(intentos, aciertos, tiempo, reiniciarJuego) {
     swal({
       icon:
         "https://i.pinimg.com/474x/d6/ec/34/d6ec3410a8babd77a758bcd20b632470.jpg",
-      text: "Intentos: " + intentos,
+      text:
+        "Intentos: " +
+        intentos +
+        " " +
+        " Aciertos: " +
+        aciertos +
+        " " +
+        " Tiempo: " +
+        tiempo +
+        " " +
+        " seg",
       buttons: {
         reiniciar: {
           text: "Reiniciar",

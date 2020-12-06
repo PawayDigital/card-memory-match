@@ -8,9 +8,7 @@
         <span class="h5 mr-1">Intentos: {{ intentos }}</span>
         <span class="h5 mr-1">Aciertos: {{ aciertos }}</span
         ><br />
-        <span class="h5">Tiempo: </span><span id="minutos"></span>:<span
-          id="segundos"
-        ></span>
+        <span class="h5">Tiempo: {{ tiempoHTML }} seg</span>
       </p>
     </div>
     <div
@@ -20,15 +18,14 @@
     >
       <div
         :key="indiceFila + '' + indiceImagen"
-        class="col px-0 mb-3"
+        class="col px-0 mb-2  w-100"
         v-for="(imagen, indiceImagen) in fila"
       >
         <img
           @click="voltear(indiceFila, indiceImagen)"
           :class="{ girar: imagen.mostrar }"
           :src="imagen.mostrar ? imagen.ruta : imageOculta"
-          class="pr-1"
-          width="100%"
+          class="pr-1 w-100"
           height="auto"
         />
       </div>
@@ -58,6 +55,9 @@ export default {
       ciclo: 0,
       intentos: 0,
       aciertos: 0,
+      tiempo: 0,
+      tiempoHTML: 0,
+      temporizadorr: "",
       memorama: [],
       imageOculta:
         "https://res.cloudinary.com/dlgvxohur/image/upload/v1606774889/sck0lko5kumiyrvpmkdk.png",
@@ -98,7 +98,14 @@ export default {
           this.imagenes = this.carros;
           break;
       }
+      this.temporizador();
       this.reiniciarJuego();
+    },
+    temporizador() {
+      this.temporizadorr = setInterval(() => {
+        this.tiempo++;
+        this.tiempoHTML = this.tiempo;
+      }, 1000);
     },
     reiniciarJuego() {
       let memorama = [];
@@ -128,6 +135,7 @@ export default {
       // Reiniciar intentos
       this.intentos = 0;
       this.aciertos = 0;
+      this.tiempoHTML = 0;
       // Asignar a instancia de Vue para que lo dibuje
       this.memorama = memoramaDividido;
     },
@@ -187,6 +195,7 @@ export default {
         this.ultimasCoordenadas.indiceImagen = null;
         // Cada que acierta comprobamos si ha ganado
         if (this.haGanado()) {
+          clearInterval(this.temporizadorr);
           this.victoria();
         }
       } else {
@@ -216,7 +225,12 @@ export default {
       );
     },
     victoria() {
-      AlertService.indicarVictoria(this.intentos, this.reiniciarJuego());
+      AlertService.indicarVictoria(
+        this.intentos,
+        this.aciertos,
+        this.tiempoHTML,
+        this.reiniciarJuego()
+      );
     },
     mezclarArreglo(a) {
       MezclarService.mezclar(a);
@@ -224,5 +238,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
