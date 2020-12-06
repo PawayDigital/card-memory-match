@@ -1,5 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Categorias from "../views/Categorias.vue";
+import Cuadriculas from "../views/Cuadriculas.vue";
+import Juego from "../views/Juego.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -9,24 +13,19 @@ const routes = [
     component: () => import("@/views/Home.vue"),
   },
   {
-    path: "/game",
-    name: "Game",
-    component: () => import("@/views/Game.vue"),
+    path: "/Categorias",
+    name: "Categoria",
+    component: Categorias,
   },
   {
-    path: "/game/logos",
-    name: "Logos",
-    component: () => import("@/views/Logos.vue"),
+    path: "/Cuadriculas",
+    name: "Cuadriculas",
+    component: Cuadriculas,
   },
   {
-    path: "/logos/3x2",
-    name: "3x2",
-    component: () => import("@/views/logos/3x2.vue"),
-  },
-  {
-    path: "/game/peliculas",
-    name: "Peliculas",
-    component: () => import("@/views/Peliculas.vue"),
+    path: "/Juego",
+    name: "Juego",
+    component: Juego,
   },
 ];
 

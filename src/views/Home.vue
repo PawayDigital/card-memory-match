@@ -5,7 +5,7 @@
         class="d-flex align-items-center justify-content-center"
         style="height: 100vh;"
       >
-        <router-link to="/game" class="btn btn-dark btn-block"
+        <router-link to="/categorias" class="btn btn-dark btn-block"
           >JUGAR</router-link
         >
       </div>
