@@ -1,8 +1,8 @@
 import swal from "sweetalert";
-
+import router from "@/router";
 export default new (class AlertService {
   // Mostrar alerta de victoria y reiniciar juego
-  indicarVictoria(intentos, reiniciarJuego, salir) {
+  indicarVictoria(intentos, reiniciarJuego) {
     swal({
       icon:
         "https://i.pinimg.com/474x/d6/ec/34/d6ec3410a8babd77a758bcd20b632470.jpg",
@@ -23,7 +23,7 @@ export default new (class AlertService {
           reiniciarJuego;
           break;
         case "home":
-          salir;
+          router.push("/categorias");
           break;
       }
     });

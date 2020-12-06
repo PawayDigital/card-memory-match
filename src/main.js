@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
+require("./plugins/fontawesome");
+
 Vue.config.productionTip = false;
 
 // Install BootstrapVue
