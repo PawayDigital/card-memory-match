@@ -8,15 +8,15 @@
         <b-row>
           <b-col cols="6">
             <div
-              class="btn btn-dark ml-5 px-4"
+              class="btn btn-dark ml-4 px-4"
               type="submit"
               v-on:click="categoria = 'logos'"
               @click="siguiente()"
             >
               <div>
-                <img :src="logo" width="50" height="50" />
+                <img :src="logo" width="100%" height="auto" />
               </div>
-              <div class="mt-2">Logos</div>
+              <div class="mt-2"><h5>Logos</h5></div>
             </div>
           </b-col>
           <b-col cols="6">
@@ -27,9 +27,9 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="carro" width="50" height="50" />
+                <img :src="carro" width="100%" height="auto" />
               </div>
-              <div class="mt-2">Carros</div>
+              <div class="mt-2"><h5>Carros</h5></div>
             </div>
           </b-col>
           <b-col
@@ -54,9 +54,9 @@ export default {
     return {
       categoria: "",
       logo:
-        "https://res.cloudinary.com/dlgvxohur/image/upload/v1607011791/zznzloayi5x42qze3vrt.jpg",
+        "https://image.freepik.com/vector-gratis/coleccion-logos-rock-diseno-plano_23-2147823675.jpg",
       carro:
-        "https://res.cloudinary.com/dlgvxohur/image/upload/v1607262185/carros/md30npmk8gwvv1kmguhl.png",
+        "https://image.freepik.com/psd-gratis/coche-plata-sedan_53876-84522.jpg",
     };
   },
   mounted() {
@@ -70,3 +70,4 @@ export default {
   },
 };
 </script>
+<style></style>

@@ -13,7 +13,7 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="this.image" width="50" height="50" />
+                <img :src="this.image" width="100%" height="auto" />
               </div>
               <div class="mt-2">3x2</div>
             </div></b-col
@@ -25,7 +25,7 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="this.image" width="50" height="50" />
+                <img :src="this.image" width="100%" height="auto" />
               </div>
               <div class="mt-2">4x3</div>
             </div></b-col
@@ -38,7 +38,7 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="this.image" width="50" height="50" />
+                <img :src="this.image" width="100%" height="auto" />
               </div>
               <div class="mt-2">5x4</div>
             </div></b-col
@@ -50,7 +50,7 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="this.image" width="50" height="50" />
+                <img :src="this.image" width="100%" height="auto" />
               </div>
               <div class="mt-2">6x5</div>
             </div></b-col
@@ -62,7 +62,7 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="this.image" width="50" height="50" />
+                <img :src="this.image" width="100%" height="auto" />
               </div>
               <div class="mt-2">8x7</div>
             </div></b-col
@@ -74,7 +74,7 @@
               @click="siguiente()"
             >
               <div>
-                <img :src="this.image" width="50" height="50" />
+                <img :src="this.image" width="100%" height="auto" />
               </div>
               <div class="mt-2">9x8</div>
             </div></b-col

@@ -124,10 +124,10 @@ export default {
       for (let i = 0; i < this.ciclo; i++) {
         memorama[i] = cantImage[i];
       }
-      // Sacudir o mover arreglo; es decir, hacerlo aleatorio
+      // hacerlo aleatorio las cartas
       this.mezclarArreglo(memorama);
 
-      // Dividirlo en subarreglos o columnas
+      // Dividirlo en columnas
       let memoramaDividido = [];
       for (let i = 0; i < this.ciclo; i += this.COLUMNAS) {
         memoramaDividido.push(memorama.slice(i, i + this.COLUMNAS));
@@ -139,13 +139,13 @@ export default {
       // Asignar a instancia de Vue para que lo dibuje
       this.memorama = memoramaDividido;
     },
-    // Se desencadena cuando se hace click en la imagen
+    // cuando se hace click en la imagen se activa el metodo
     voltear(indiceFila, indiceImagen) {
       // Si se está regresando una imagen a su estado original, detener flujo
       if (this.esperandoTimeout) {
         return;
       }
-      // Si es una imagen acertada, no nos importa que la intenten voltear
+      // Si es una imagen acertada, no intenten voltear de nuevo la imagen
       if (this.memorama[indiceFila][indiceImagen].acertada) {
         return;
       }
@@ -183,7 +183,6 @@ export default {
         return;
       }
       // En caso de que la haya encontrado, ¡acierta!
-      // Se basta en ultimaImagenSeleccionada
       this.memorama[indiceFila][indiceImagen].mostrar = true;
       if (imagenSeleccionada.ruta === ultimaImagenSeleccionada.ruta) {
         this.aciertos++;
@@ -214,7 +213,6 @@ export default {
         this.aumentarIntento();
       }
     },
-    // Aumenta un intento y verifica si el jugador ha perdido
     aumentarIntento() {
       this.intentos++;
     },
@@ -224,6 +222,7 @@ export default {
         arreglo.every((imagen) => imagen.acertada)
       );
     },
+    // muestra un mensaje de alerta dicendo que ha ganado
     victoria() {
       AlertService.indicarVictoria(
         this.intentos,
